@@ -13,7 +13,7 @@ Initially, this project was meant for personal use only, but later I realised th
 Like I said earlier, this project was meant for personal use only. If you find this boilerplate useful, you are free to clone and modify it as you see fit for your project, but like I said, this boilerplate is based on the projects I am used to working on.
 
 ## Packages
-Here I will show all the packages I installed and configured. For some of them, I did some basic configurations, and for others, I wrote some example code just to help you with your own project. And I will leave the documentation link or YouTube video where you can read or watch about a library if you do not know what it does or how to use it.
+Here I will show all the packages I installed and configured. For some of them, I did some basic configurations, and for others, I wrote some example code just to help you with your own project. And I will leave the documentation link or YouTube video where you can learn about the package if you do not know what it does or how to use it.
 
 - **Axios**
   - [Official Documentation](https://axios-http.com/)
@@ -41,8 +41,7 @@ Here I will show all the packages I installed and configured. For some of them, 
   - [Official Documentation](https://github.com/remix-run/react-router)
   - [Youtube Tutorial](https://www.youtube.com/watch?v=Ul3y1LXxzdU&t=727s)
 
-- **Redux Toolkit**
-  Before using Redux Toolkit, you should at least understand how the old Redux works
+- **Redux Toolkit (Before using Redux Toolkit, you should at least understand how the old Redux works)**
   - [Official Documentation](https://redux-toolkit.js.org/)
   - [Youtube Tutorial](https://www.youtube.com/watch?v=bbkBuqC1rU4&t=1594s)
 
