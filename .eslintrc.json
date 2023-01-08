@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb", "airbnb-typescript"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "quotes": ["warn", "single"],
+    "comma-dangle": ["error", "never"],
+    "semi": ["warn", "never"],
+    "react/prop-types": [0],
+    "prefer-const": ["warn"],
+    "no-unused-vars": 1,
+    "no-plusplus": "off",
+    "import/prefer-default-export": "off",
+    "consistent-return": "warn",
+    "prefer-destructuring": "warn",
+    "react/button-has-type": "warn",
+    "react/jsx-one-expression-per-line": "warn",
+    "no-param-reassign": "warn",
+    "@typescript-eslint/quotes": ["warn", "single"],
+    "@typescript-eslint/comma-dangle": ["error", "never"],
+    "@typescript-eslint/semi": ["warn", "never"],
+    "@typescript-eslint/react/prop-types": [0],
+    "@typescript-eslint/no-unused-vars": 1,
+    "@typescript-eslint/no-plusplus": "off",
+    "@typescript-eslint/import/prefer-default-export": "off"
+  }
+}
