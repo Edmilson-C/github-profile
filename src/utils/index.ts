@@ -16,17 +16,15 @@ export const generateUUID = () => {
   return uuid
 }
 
-export const formatDate = (date: string | Date = new Date()) => {
+export const formatDate = (date: string | Date = new Date(), separator: string = '/') => {
   dayjs.locale(`${i18next.t('defaults.lang')}`)
   const d = dayjs(date)
 
   return {
     unformattedDate: d,
     displayDate: d.format('LL'),
-    fullDate: d.format('DD/MM/YYYY'),
-    fullDateReverse: d.format('YYYY/MM/DD'),
-    fullDateDash: d.format('DD-MM-YYYY'),
-    fullDateDashReverse: d.format('YYYY-MM-DD'),
+    fullDate: d.format(`DD${separator}MM${separator}YYYY`),
+    fullDateReverse: d.format(`YYYY${separator}MM${separator}DD`),
     fullDateMonth: d.format('DD/MMM/YYYY'),
     fullDateMonthReverse: d.format('YYYY/MMM/DD'),
     time: d.format('LT'),
@@ -35,26 +33,29 @@ export const formatDate = (date: string | Date = new Date()) => {
   }
 }
 
-export const formatMoney = (number: number, currency: boolean = false) => (
-  currency
-    ? `${Number.parseFloat(`${number}`).toLocaleString('pt', {
-      style: 'decimal',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    })} MZN`
-    : Number.parseFloat(`${number}`).toLocaleString('pt', {
-      style: 'decimal',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    })
-)
+// eslint-disable-next-line no-confusing-arrow
+export const formatMoney = (
+  number: number,
+  currency: boolean = false,
+  maximumFractionDigits: number = 2
+) => currency
+  ? `${Number.parseFloat(`${number}`).toLocaleString('pt', {
+    style: 'decimal',
+    minimumFractionDigits: 2,
+    maximumFractionDigits
+  })} MZN`
+  : Number.parseFloat(`${number}`).toLocaleString('pt', {
+    style: 'decimal',
+    minimumFractionDigits: 2,
+    maximumFractionDigits
+  })
 
 export const generateWorksheet = (reportArray: any, name: string) => {
   const wb = utils.book_new() // create a new book
   const ws = utils.json_to_sheet(reportArray) // create a new worksheet
 
-  const { fullDateDash } = formatDate(new Date())
+  const { fullDate } = formatDate(new Date(), '-')
 
   utils.book_append_sheet(wb, ws)
-  writeFile(wb, `relatorio_${name}_${fullDateDash}.xlsx`)
+  writeFile(wb, `relatorio_${name}_${fullDate}.xlsx`)
 }
