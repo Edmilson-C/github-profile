@@ -59,3 +59,5 @@ export const generateWorksheet = (reportArray: any, name: string) => {
   utils.book_append_sheet(wb, ws)
   writeFile(wb, `relatorio_${name}_${fullDate}.xlsx`)
 }
+
+export const cloneObject = (object: any) => JSON.parse(JSON.stringify(object))

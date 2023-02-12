@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { Counter } from '../../data/types'
 
 const incrementCounter = (state: Counter) => {
