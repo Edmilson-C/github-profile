@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes as Routs, Route } from 'react-router-dom'
 
 import App from './App'
