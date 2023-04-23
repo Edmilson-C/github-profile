@@ -27,6 +27,8 @@
     "react/jsx-one-expression-per-line": "warn",
     "no-param-reassign": "warn",
     "react/function-component-definition": "off",
+    "no-nested-ternary": "off",
+    "react/require-default-props": "off",
     "@typescript-eslint/quotes": ["warn", "single"],
     "@typescript-eslint/comma-dangle": ["error", "never"],
     "@typescript-eslint/semi": ["warn", "never"],
