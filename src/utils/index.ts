@@ -102,3 +102,26 @@ export const generateWorksheet = (reportArray: any, name: string) => {
 }
 
 export const cloneObject = (object: any) => JSON.parse(JSON.stringify(object))
+
+export const printPDF = (file: File): Promise<void> => (
+  new Promise((resolve) => {
+    const reader = new window.FileReader()
+    reader.readAsDataURL(file)
+    const url = URL.createObjectURL(file)
+    reader.onload = () => {
+      const embed = document.createElement('iframe') as HTMLIFrameElement
+      embed.id = `embed-printing-element-${Math.random()}`
+      // @ts-ignore
+      embed.type = 'application/pdf'
+      embed.src = url
+      embed.style.height = '0'
+      const body = document.getElementsByTagName('body')[0]
+      body.appendChild(embed)
+      embed.addEventListener('load', () => {
+        embed.contentWindow?.focus()
+        embed.contentWindow?.print()
+        resolve()
+      })
+    }
+  })
+)
