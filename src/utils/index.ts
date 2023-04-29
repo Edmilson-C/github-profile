@@ -2,9 +2,9 @@
 /* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
 import { utils, writeFile } from 'xlsx'
-import i18next from 'i18next'
 import * as dayjs from 'dayjs'
 import 'dayjs/locale/pt'
+import * as localizedFormat from 'dayjs/plugin/localizedFormat'
 
 export const generateUUID = () => {
   let dt = new Date().getTime()
@@ -16,20 +16,21 @@ export const generateUUID = () => {
   return uuid
 }
 
-export const formatDate = (date: string | Date = new Date(), separator: string = '/') => {
-  dayjs.locale(`${i18next.t('defaults.lang')}`)
+export const formatDate = (date: string | Date = new Date(), separator: string = '/', lang = 'pt') => {
+  dayjs.extend(localizedFormat)
+  dayjs.locale(lang)
   const d = dayjs(date)
 
   return {
-    unformattedDate: d,
-    displayDate: d.format('LL'),
-    fullDate: d.format(`DD${separator}MM${separator}YYYY`),
-    fullDateReverse: d.format(`YYYY${separator}MM${separator}DD`),
-    fullDateMonth: d.format('DD/MMM/YYYY'),
-    fullDateMonthReverse: d.format('YYYY/MMM/DD'),
-    time: d.format('LT'),
-    timeWithSeconds: d.format('LTS'),
-    fullDateTime: d.format('YYYY-MM-DDTHH:mm:ssZ')
+    unformattedDate: `${d}`,
+    displayDate: `${d.format('LL')}`,
+    fullDate: `${d.format(`DD${separator}MM${separator}YYYY`)}`,
+    fullDateReverse: `${d.format(`YYYY${separator}MM${separator}DD`)}`,
+    fullDateMonth: `${d.format(`DD${separator}MMM${separator}YYYY`)}`,
+    fullDateMonthReverse: `${d.format(`YYYY${separator}MMM${separator}DD`)}`,
+    time: `${d.format('L LT')}`,
+    timeWithSeconds: `${d.format('LTS')}`,
+    fullDateTime: `${d.format('YYYY-MM-DDTHH:mm:ssZ')}`
   }
 }
 
