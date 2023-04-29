@@ -34,6 +34,46 @@ export const formatDate = (date: string | Date = new Date(), separator: string =
   }
 }
 
+export const addDate = (quantity: number, type = 'day', date: string | Date = new Date(), separator: string = '/', lang = 'pt') => {
+  dayjs.extend(localizedFormat)
+  dayjs.locale(lang)
+
+  // @ts-ignore
+  const d = dayjs(date).add(quantity, type)
+
+  return {
+    unformattedDate: `${d}`,
+    displayDate: `${d.format('LL')}`,
+    fullDate: `${d.format(`DD${separator}MM${separator}YYYY`)}`,
+    fullDateReverse: `${d.format(`YYYY${separator}MM${separator}DD`)}`,
+    fullDateMonth: `${d.format(`DD${separator}MMM${separator}YYYY`)}`,
+    fullDateMonthReverse: `${d.format(`YYYY${separator}MMM${separator}DD`)}`,
+    time: `${d.format('L LT')}`,
+    timeWithSeconds: `${d.format('LTS')}`,
+    fullDateTime: `${d.format('YYYY-MM-DDTHH:mm:ssZ')}`
+  }
+}
+
+export const subtractDate = (quantity: number, type = 'day', date: string | Date = new Date(), separator: string = '/', lang = 'pt') => {
+  dayjs.extend(localizedFormat)
+  dayjs.locale(lang)
+
+  // @ts-ignore
+  const d = dayjs(date).subtract(quantity, type)
+
+  return {
+    unformattedDate: `${d}`,
+    displayDate: `${d.format('LL')}`,
+    fullDate: `${d.format(`DD${separator}MM${separator}YYYY`)}`,
+    fullDateReverse: `${d.format(`YYYY${separator}MM${separator}DD`)}`,
+    fullDateMonth: `${d.format(`DD${separator}MMM${separator}YYYY`)}`,
+    fullDateMonthReverse: `${d.format(`YYYY${separator}MMM${separator}DD`)}`,
+    time: `${d.format('L LT')}`,
+    timeWithSeconds: `${d.format('LTS')}`,
+    fullDateTime: `${d.format('YYYY-MM-DDTHH:mm:ssZ')}`
+  }
+}
+
 // eslint-disable-next-line no-confusing-arrow
 export const formatMoney = (
   number: number,
