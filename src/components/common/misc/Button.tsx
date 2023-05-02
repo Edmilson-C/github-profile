@@ -23,7 +23,7 @@ const Button = ({
   children,
   handleClick = () => {}
 }: ButtonProps) => {
-  const [classList, setClassList] = useState(className)
+  const [classList, setClassList] = useState<string>(className)
 
   const clickedEvent = () => {
     if (loading || disabled) return
