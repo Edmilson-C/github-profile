@@ -8,6 +8,8 @@ import 'dayjs/locale/pt'
 import * as localizedFormat from 'dayjs/plugin/localizedFormat'
 import * as html2pdf from 'html2pdf.js'
 
+import { HOLIDAYS } from '../data/constants'
+
 export const generateUUID = () => {
   let dt = new Date().getTime()
   const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -135,4 +137,21 @@ export const generatePDF = (element: HTMLElement | ReactNode, options: Object) =
     .from(element)
     .set(options)
     .save()
+}
+
+export function isHoliday(date: Date = new Date()) {
+  const day = date.getDate()
+  const month = date.getMonth()
+
+  if (HOLIDAYS[month].length < 0) {
+    return false
+  }
+
+  for (let j = 0; j < HOLIDAYS[month].length; j++) {
+    if (day === HOLIDAYS[month][j]) {
+      return true
+    }
+  }
+
+  return false
 }
