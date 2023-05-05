@@ -1,10 +1,12 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
+import { ReactNode } from 'react'
 import { utils, writeFile } from 'xlsx'
 import * as dayjs from 'dayjs'
 import 'dayjs/locale/pt'
 import * as localizedFormat from 'dayjs/plugin/localizedFormat'
+import * as html2pdf from 'html2pdf.js'
 
 export const generateUUID = () => {
   let dt = new Date().getTime()
@@ -103,6 +105,7 @@ export const generateWorksheet = (reportArray: any, name: string) => {
 
 export const cloneObject = (object: any) => JSON.parse(JSON.stringify(object))
 
+// Print a PDF from a BLOB file
 export const printPDF = (file: File): Promise<void> => (
   new Promise((resolve) => {
     const reader = new window.FileReader()
@@ -125,3 +128,11 @@ export const printPDF = (file: File): Promise<void> => (
     }
   })
 )
+
+// Generate PDF from a Element or Component
+export const generatePDF = (element: HTMLElement | ReactNode, options: Object) => {
+  html2pdf()
+    .from(element)
+    .set(options)
+    .save()
+}
