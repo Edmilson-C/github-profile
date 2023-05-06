@@ -1,6 +1,4 @@
 /* eslint-disable no-bitwise */
-/* eslint-disable func-names */
-/* eslint-disable prefer-arrow-callback */
 import { ReactNode } from 'react'
 import { utils, writeFile } from 'xlsx'
 import * as dayjs from 'dayjs'
@@ -12,7 +10,7 @@ import { HOLIDAYS } from '../data/constants'
 
 export const generateUUID = () => {
   let dt = new Date().getTime()
-  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
     const r = (dt + Math.random() * 16) % 16 | 0
     dt = Math.floor(dt / 16)
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16)
@@ -95,9 +93,9 @@ export const formatMoney = (
     maximumFractionDigits
   })
 
-export const generateWorksheet = (reportArray: any, name: string) => {
-  const wb = utils.book_new() // create a new book
-  const ws = utils.json_to_sheet(reportArray) // create a new worksheet
+export const generateWorksheet = (data: Object[], name: string) => {
+  const wb = utils.book_new()
+  const ws = utils.json_to_sheet(data)
 
   const { fullDate } = formatDate(new Date(), '-')
 
