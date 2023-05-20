@@ -47,7 +47,7 @@ const InputText = ({
   handleCut,
   handlePaste
 }: InputTextProps) => {
-  const [containerClass, setContainerClass] = useState<string>(className)
+  const [containerClass, setContainerClass] = useState<string>('')
   const [inputClass, setInputClass] = useState<string>('')
   const [iconClass, setIconClass] = useState<string>('')
   const [inputType, setInputType] = useState<string>(type)
@@ -55,9 +55,9 @@ const InputText = ({
   useEffect(() => {
     if (label !== '') {
       if (orientation === 'vertical') {
-        setContainerClass('flex-col space-y-2')
+        setContainerClass(`${className} flex-col space-y-2`)
       } else {
-        setContainerClass('items-center space-x-2')
+        setContainerClass(`${className} items-start space-x-3`)
       }
     }
 
