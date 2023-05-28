@@ -5,6 +5,7 @@ import * as dayjs from 'dayjs'
 import 'dayjs/locale/pt'
 import * as localizedFormat from 'dayjs/plugin/localizedFormat'
 import * as html2pdf from 'html2pdf.js'
+import _ from 'lodash'
 
 import { HOLIDAYS } from '../data/constants'
 
@@ -103,7 +104,11 @@ export const generateWorksheet = (data: Object[], name: string) => {
   writeFile(wb, `relatorio_${name}_${fullDate}.xlsx`)
 }
 
-export const cloneObject = (object: any) => JSON.parse(JSON.stringify(object))
+export const chunk = (value: any) => _.chunk(value)
+
+export const clone = (value: any) => _.clone(value)
+
+export const cloneDeep = (value: any) => _.cloneDeep(value)
 
 // Print a PDF from a BLOB file
 export const printPDF = (file: File): Promise<void> => (
