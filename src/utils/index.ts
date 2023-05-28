@@ -104,7 +104,7 @@ export const generateWorksheet = (data: Object[], name: string) => {
   writeFile(wb, `relatorio_${name}_${fullDate}.xlsx`)
 }
 
-export const chunk = (value: any) => _.chunk(value)
+export const chunk = (value: any[], size: number) => _.chunk(value, size)
 
 export const clone = (value: any) => _.clone(value)
 
