@@ -23,6 +23,7 @@ interface TableHeader {
   key: string
   title: string
   class?: string
+  formatter?: () => void
 }
 
 const Table = ({
@@ -122,10 +123,11 @@ const Table = ({
                   {tableHeaders.map(
                     (header) => getHeaderKey(header) !== 'id' && (
                       <td key={getHeaderKey(header)} className="p-3">
-                        {
+                        {header.formatter
                           // @ts-ignore
-                          item[getHeaderKey(header)]
-                        }
+                          ? header.formatter(item[getHeaderKey(header)])
+                          // @ts-ignore
+                          : item[getHeaderKey(header)]}
                       </td>
                     )
                   )}
