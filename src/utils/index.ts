@@ -19,62 +19,66 @@ export const generateUUID = () => {
   return uuid
 }
 
-export const formatDate = (date: string | Date = new Date(), separator: string = '/', lang = 'pt') => {
+export const formatDate = (
+  date: string | Date = new Date(),
+  param: string = 'date',
+  separator: string = '/',
+  lang = 'pt'
+) => {
   dayjs.extend(localizedFormat)
   dayjs.locale(lang)
   const d = dayjs(date)
 
-  return {
-    unformattedDate: `${d}`,
-    displayDate: `${d.format('LL')}`,
-    fullDate: `${d.format(`DD${separator}MM${separator}YYYY`)}`,
-    fullDateReverse: `${d.format(`YYYY${separator}MM${separator}DD`)}`,
-    fullDateMonth: `${d.format(`DD${separator}MMM${separator}YYYY`)}`,
-    fullDateMonthReverse: `${d.format(`YYYY${separator}MMM${separator}DD`)}`,
-    time: `${d.format('L LT')}`,
-    timeWithSeconds: `${d.format('LTS')}`,
-    fullDateTime: `${d.format('YYYY-MM-DDTHH:mm:ssZ')}`
+  const dateObject: any = {
+    displayDate: d.format('LLLL').substring(0, d.format('LLLL').length - 9),
+    date: `${d.format(`DD${separator}MM${separator}YYYY`)}`,
+    dateReverse: `${d.format(`YYYY${separator}MM${separator}DD`)}`,
+    dateMonth: `${d.format(`DD${separator}MMM${separator}YYYY`)}`,
+    dateMonthReverse: `${d.format(`YYYY${separator}MMM${separator}DD`)}`,
+    time: `${d.format('HH:mm')}`,
+    timeSeconds: `${d.format('HH:mm:ss')}`,
+    hoursTimezone: d.format('HH:mm:ssZ'),
+    dateTime: `${d.format(`DD${separator}MM${separator}YYYY`)} ${d.format('HH:mm')}`,
+    fullDateTime: d.format()
   }
+
+  return dateObject[param]
 }
 
-export const addDate = (quantity: number, type = 'day', date: string | Date = new Date(), separator: string = '/', lang = 'pt') => {
+export const addDate = (
+  quantity: number,
+  type = 'day',
+  date: string | Date = new Date(),
+  param: string = 'date',
+  separator: string = '/',
+  lang = 'pt'
+) => {
   dayjs.extend(localizedFormat)
   dayjs.locale(lang)
 
   // @ts-ignore
   const d = dayjs(date).add(quantity, type)
 
-  return {
-    unformattedDate: `${d}`,
-    displayDate: `${d.format('LL')}`,
-    fullDate: `${d.format(`DD${separator}MM${separator}YYYY`)}`,
-    fullDateReverse: `${d.format(`YYYY${separator}MM${separator}DD`)}`,
-    fullDateMonth: `${d.format(`DD${separator}MMM${separator}YYYY`)}`,
-    fullDateMonthReverse: `${d.format(`YYYY${separator}MMM${separator}DD`)}`,
-    time: `${d.format('L LT')}`,
-    timeWithSeconds: `${d.format('LTS')}`,
-    fullDateTime: `${d.format('YYYY-MM-DDTHH:mm:ssZ')}`
-  }
+  // @ts-ignore
+  return formatDate(d, param, separator, lang)
 }
 
-export const subtractDate = (quantity: number, type = 'day', date: string | Date = new Date(), separator: string = '/', lang = 'pt') => {
+export const subtractDate = (
+  quantity: number,
+  type = 'day',
+  date: string | Date = new Date(),
+  param: string = 'date',
+  separator: string = '/',
+  lang = 'pt'
+) => {
   dayjs.extend(localizedFormat)
   dayjs.locale(lang)
 
   // @ts-ignore
   const d = dayjs(date).subtract(quantity, type)
 
-  return {
-    unformattedDate: `${d}`,
-    displayDate: `${d.format('LL')}`,
-    fullDate: `${d.format(`DD${separator}MM${separator}YYYY`)}`,
-    fullDateReverse: `${d.format(`YYYY${separator}MM${separator}DD`)}`,
-    fullDateMonth: `${d.format(`DD${separator}MMM${separator}YYYY`)}`,
-    fullDateMonthReverse: `${d.format(`YYYY${separator}MMM${separator}DD`)}`,
-    time: `${d.format('L LT')}`,
-    timeWithSeconds: `${d.format('LTS')}`,
-    fullDateTime: `${d.format('YYYY-MM-DDTHH:mm:ssZ')}`
-  }
+  // @ts-ignore
+  return formatDate(d, param, separator, lang)
 }
 
 // eslint-disable-next-line no-confusing-arrow
@@ -98,10 +102,10 @@ export const generateWorksheet = (data: Object[], name: string) => {
   const wb = utils.book_new()
   const ws = utils.json_to_sheet(data)
 
-  const { fullDate } = formatDate(new Date(), '-')
+  const date = formatDate(new Date(), 'date', '-')
 
   utils.book_append_sheet(wb, ws)
-  writeFile(wb, `relatorio_${name}_${fullDate}.xlsx`)
+  writeFile(wb, `relatorio_${name}_${date}.xlsx`)
 }
 
 export const chunk = (value: any[], size: number) => _.chunk(value, size)
