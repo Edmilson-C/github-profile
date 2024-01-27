@@ -1,11 +1,11 @@
 import { Routes as Routs, Route } from 'react-router-dom'
 
-import App from './App'
+import Home from './pages'
 
 function Routes() {
   return (
     <Routs>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<Home />} />
       <Route path="/*" element={<h1> Page Not Found </h1>} />
     </Routs>
   )
