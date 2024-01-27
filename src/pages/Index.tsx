@@ -1,7 +1,9 @@
+import Header from '../components/layout/Header'
+
 function Index() {
   return (
-    <div className="w-screen flex flex-col justify-center items-center">
-      fefeffe
+    <div className="w-screen h-screen flex flex-col">
+      <Header />
     </div>
   )
 }
