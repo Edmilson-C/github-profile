@@ -55,9 +55,9 @@ const InputText = ({
   useEffect(() => {
     if (label !== '') {
       if (orientation === 'vertical') {
-        setContainerClass(`${className} flex-col space-y-2`)
+        setContainerClass('flex-col space-y-2')
       } else {
-        setContainerClass(`${className} items-start space-x-3`)
+        setContainerClass('items-start space-x-3')
       }
     }
 
@@ -74,19 +74,19 @@ const InputText = ({
   }, [])
 
   return (
-    <div className={`flex ${containerClass}`}>
+    <div className={`flex ${containerClass} ${className}`}>
       {label !== '' && (
         <span className="flex">
           {label}
           {required && <strong className="text-red-500 ml-1">*</strong>}
         </span>
       )}
-      <div className="flex flex-col items-start">
+      <div className="flex flex-col items-start w-full">
         <div className="flex relative items-center w-full">
           <input
             type={inputType}
             value={value}
-            className={`${inputClass} w-full border rounded-md border-gray-200 focus:outline-none focus:border focus:border-green-500 focus:invalid:border-red-500`}
+            className={`${inputClass} w-full rounded-md border border-gray-dark bg-gray-dark text-sm text-white focus:outline-none focus:border focus:border-green-500 focus:invalid:border-red-500`}
             placeholder={placeholder}
             disabled={disabled}
             min={min}
