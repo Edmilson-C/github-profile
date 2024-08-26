@@ -10,7 +10,7 @@ const Header = () => (
       height: '30vh'
     }}
   >
-    <InputText type="text" className="w-auto" size="lg" placeholder="Username" />
+    <InputText type="text" className="w-1/2" size="lg" placeholder="Username" />
   </header>
 )
 
